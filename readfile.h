@@ -3,10 +3,11 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <stdbool.h>
-
 #define BUFFER_LINE 1024
 
-bool find_file(char *filename, char *ext)
+char *filename_dir = "dir.tmp";
+
+bool file_exists(char *filename, char *ext)
 {
     int size_of_all = (int)(strlen(filename) + strlen(ext));
     char nameof_file[size_of_all];
@@ -25,4 +26,16 @@ bool find_file(char *filename, char *ext)
     }
     puts("I did find the file!");
     return true;
+}
+char *get_directory()
+{
+    char cmm[100];
+    char buf[BUFFER_LINE];
+    char *ptr_buf = &buf[0];
+    FILE *tmp;
+    sprintf(cmm, "pwd >> %s", filename_dir);
+    system(cmm);
+    tmp = fopen(filename_dir, "r");
+    fgets(buf, BUFFER_LINE - 1, tmp);
+    return buf;
 }
