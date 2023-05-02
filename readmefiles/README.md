@@ -2,9 +2,8 @@
 
 <h1>An abstraction to read some kind of files in C.</h1>
 
-<code>
-    To use it, include in your algorithm!
-</code>
+
+To use it, include in your algorithm!
 
 ```c
     #include "readfile.h"
