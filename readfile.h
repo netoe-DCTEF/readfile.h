@@ -3,15 +3,15 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <stdbool.h>
+#include "validext.h"
 
 #define BUFFER_LINE 1024
 #define BUF_CMM 100
 
 char *filename_dir = "dir.tmp";
-
 bool file_exists(char *filename, char *ext)
 {
-    int size_of_all = (int)(strlen(filename) + strlen(ext));
+    const int size_of_all = sizeof(filename) + sizeof(ext);
     char nameof_file[size_of_all];
     nameof_file[size_of_all] = '\0';
     char *__ptr_nameof = &nameof_file[0];
@@ -54,4 +54,17 @@ FILE *get_file(char *filename, char *ext)
     {
         return file_to_load;
     }
+}
+
+FILE *put_text_into_file(FILE *ptr, const char *filename, const int EXT_TYPES, const char *all_text)
+{
+
+    if (EXT_TYPES < 0 || EXT_TYPES > 1)
+    {
+        puts("ERROR: Invalid EXT_TYPES!");
+        return NULL;
+    }
+    ptr = fopen("filename.txt", "w");
+    fputs(all_text, ptr);
+    return ptr;
 }
